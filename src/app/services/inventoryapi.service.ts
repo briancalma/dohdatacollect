@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse, HttpRequest } from '@angula
 import { timeout } from 'rxjs/operators';
 
 
-const inventoryserver = "http://localhost/inventoryapi/";
+const inventoryserver = "http://10.0.0.38/inventoryapi/";
 
 
 @Injectable({
@@ -39,7 +39,7 @@ myuser : any;
 
 authuser(user): Observable<Object> {
  console.log(user);
-let response = this.http.post(inventoryserver +'v1/employees/aut',{
+let response = this.http.post(inventoryserver +'v1/employees/auth',{
       userid: user.userid,
       userpass: user.userpass
     },{headers: { 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}}).pipe(timeout(1000));

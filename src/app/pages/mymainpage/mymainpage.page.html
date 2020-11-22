@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">Region List</ion-text>
+        </ion-text>
+    </ion-title>
+    
+
+    <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="light" (click)="viewdata()">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+
+
+<ion-toolbar color="dark">
+<ion-searchbar placeholder="Filter Schedules" [(ngModel)]="searchtext"></ion-searchbar>
+    <ion-button color="dark" expand="full" (click)="onsearch()" no-margin>
+      <strong>SEARCH</strong>
+    </ion-button>
+
+</ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+<ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+</ion-refresher>
+
+    <ion-item lines="none" color="medium" *ngIf="regionlist==''">
+      <ion-label>
+        <h2 no-margin class="fw500 no-margin">
+          <ion-text color="dark">Could not retrieve or no data!</ion-text>
+        </h2>
+      </ion-label>
+    </ion-item>
+
+
+<ion-card *ngFor="let item of regionlist">
+  <ion-item>
+    <ion-icon name="pin" slot="start"></ion-icon>
+    <p>{{item.regname}}</p>
+    <ion-button fill="outline" slot="end" (click)="viewdata(item)">View</ion-button>
+    <ion-button fill="outline" slot="end" (click)="deletedata(item)" color="danger">Delete</ion-button>
+  </ion-item>
+
+  <ion-card-content>
+    {{item.regdesc}}
+  </ion-card-content>
+</ion-card>
+    
+
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
+
+</ion-content>
+  

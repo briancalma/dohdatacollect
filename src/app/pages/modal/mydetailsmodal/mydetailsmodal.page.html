@@ -1,0 +1,223 @@
+<ion-header>
+  <ion-toolbar color="primary">
+  	<ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">REGION DETAILS</ion-text>
+        </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button size="small" shape="round" (click)="closeModal()" color="light">
+        <ion-icon slot="start" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+
+
+    <ion-grid fixed no-padding>
+      <ion-row>
+        <ion-col size="12" padding>
+
+          <ion-list margin-bottom>
+          	<ion-list-header color="light">
+              <ion-label class="fw700">REGION FORM</ion-label>
+            </ion-list-header>
+
+
+
+            <!-- FORM FOR ADD -->
+			<form *ngIf="tempmode==0"  #frm="ngForm" (ngSubmit)="addreport()">
+            <ion-item  no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  Region Code:
+                </ion-label>
+            	<ion-input maxlength="2" [(ngModel)]="tempdata[0]['regcode']" type="numeric" name="regcode"  #regcode="ngModel" required pattern="[0-9]*"></ion-input>
+            </ion-item>
+            <div *ngIf="regcode.touched" color="red">
+            	<div *ngIf="regcode.errors?.required">
+            		This is Required!
+            	</div>
+            	<div *ngIf="regcode.errors?.pattern">
+            		Invalid number!
+            	</div>             
+            </div>
+
+
+            <ion-item  no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  Region Name:
+                </ion-label>
+            	<ion-input [(ngModel)]="tempdata[0]['regname']" type="text" name="regname"  #regname="ngModel" required></ion-input>
+            </ion-item>
+            <div *ngIf="regname.touched" color="red">
+            	<div *ngIf="regname.errors?.required">
+            		This is Required!
+            	</div>           
+            </div>
+
+
+            <ion-item  no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  Region Description:
+                </ion-label>
+            	 <ion-textarea rows="6" cols="20" [(ngModel)]="tempdata[0]['regdesc']" type="text" name="regdesc"  #regdesc="ngModel" required></ion-textarea>
+            </ion-item>
+            <div *ngIf="regdesc.touched" color="red">
+            	<div *ngIf="regdesc.errors?.required">
+            		This is Required!
+            	</div>             
+            </div>
+
+
+
+
+
+            <ion-item  no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  Region Population:
+                </ion-label>
+            	<ion-input [(ngModel)]="tempdata[0]['regpop']" type="numeric" name="regpop"  #regpop="ngModel" required pattern="[0-9]*"></ion-input>
+            </ion-item>
+            <div *ngIf="regpop.touched" color="red">
+            	<div *ngIf="regpop.errors?.required">
+            		This is Required!
+            	</div>
+            	<div *ngIf="regpop.errors?.pattern">
+            		Invalid number!
+            	</div>             
+            </div>
+
+
+
+            <ion-item  no-padding class="animated fadeInUp">
+               <ion-label position="stacked" text-wrap>
+                Status:
+                </ion-label>
+		       <ion-select required [(ngModel)]="tempdata[0]['status']" name="status" #status="ngModel">
+		        <ion-select-option *ngFor = "let item of statusoption" [value]="item.value">{{item.name}}  </ion-select-option> 
+		       </ion-select>
+            </ion-item>
+            <div *ngIf="status.touched" color="red">
+                <div *ngIf="status.errors?.required">
+                    This is Required!
+                </div>            
+            </div>
+
+
+            <ion-item no-padding class="animated fadeInUp">
+  <!--ion-label>REPORT DATE: </ion-label-->
+            <ion-label position="stacked">
+                  Report Date:
+            </ion-label>
+  			<ion-datetime name="dateupdated" 
+    			[(ngModel)]="tempdata[0]['dateupdated']"
+    			displayFormat="YYYY M D" required></ion-datetime>
+			</ion-item>
+
+            <ion-button expand="full" color="primary" type="submit" [disabled]="frm.invalid">Submit</ion-button>
+        	</form>
+
+
+
+
+      <!-- FORM FOR EDIT -->
+        	<form *ngIf="tempmode==1"  #frm="ngForm" (ngSubmit)="editreport()">
+            <ion-item  no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  Region Code:
+                </ion-label>
+            	<ion-input maxlength="2" [(ngModel)]="tempdata.regcode" type="numeric" name="regcode"  #regcode="ngModel" required pattern="[0-9]*"></ion-input>
+            </ion-item>
+            <div *ngIf="regcode.touched" color="red">
+            	<div *ngIf="regcode.errors?.required">
+            		This is Required!
+            	</div>
+            	<div *ngIf="regcode.errors?.pattern">
+            		Invalid number!
+            	</div>             
+            </div>
+
+
+            <ion-item  no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  Region Name:
+                </ion-label>
+            	<ion-input [(ngModel)]="tempdata.regname" type="text" name="regname"  #regname="ngModel" required></ion-input>
+            </ion-item>
+            <div *ngIf="regname.touched" color="red">
+            	<div *ngIf="regname.errors?.required">
+            		This is Required!
+            	</div>
+            	<div *ngIf="regname.errors?.pattern">
+            		Invalid number!
+            	</div>             
+            </div>
+
+
+            <ion-item  no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  Region Description:
+                </ion-label>
+            	<ion-textarea rows="6" cols="20" [(ngModel)]="tempdata.regdesc" type="text" name="regdesc"  #regdesc="ngModel" required></ion-textarea>
+            </ion-item>
+            <div *ngIf="regdesc.touched" color="red">
+            	<div *ngIf="regdesc.errors?.required">
+            		This is Required!
+            	</div>
+            
+            </div>
+
+
+            <ion-item  no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  Region Population:
+                </ion-label>
+            	<ion-input [(ngModel)]="tempdata.regpop" type="numeric" name="regpop"  #regpop="ngModel" required pattern="[0-9]*"></ion-input>
+            </ion-item>
+            <div *ngIf="regpop.touched" color="red">
+            	<div *ngIf="regpop.errors?.required">
+            		This is Required!
+            	</div>
+            	<div *ngIf="regpop.errors?.pattern">
+            		Invalid number!
+            	</div>             
+            </div>
+
+
+            <ion-item  no-padding class="animated fadeInUp">
+               <ion-label position="stacked" text-wrap>
+                Status:
+                </ion-label>
+		       <ion-select required [(ngModel)]="tempdata.status" name="status" #status="ngModel">
+		        <ion-select-option *ngFor = "let item of statusoption" [value]="item.value">{{item.name}}  </ion-select-option> 
+		       </ion-select>
+            </ion-item>
+            <div *ngIf="status.touched" color="red">
+                <div *ngIf="status.errors?.required">
+                    This is Required!
+                </div>            
+            </div>
+
+
+            <ion-item no-padding class="animated fadeInUp">
+  <!--ion-label>REPORT DATE: </ion-label-->
+            <ion-label position="stacked">
+                  Report Date:
+            </ion-label>
+  			<ion-datetime name="dateupdated" 
+    			[(ngModel)]="tempdata.dateupdated"
+    			displayFormat="YYYY M D" required></ion-datetime>
+			</ion-item>
+
+            <ion-button expand="full" color="primary" type="submit" [disabled]="frm.invalid">Update</ion-button>
+        	</form>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</ion-content>

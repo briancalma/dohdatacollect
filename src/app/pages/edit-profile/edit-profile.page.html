@@ -1,0 +1,220 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="profile">
+  <ion-card no-margin>
+
+ <form [formGroup]="form" class="list-form">
+    <ion-grid fixed no-padding>
+      <ion-row>
+        <ion-col size="12" padding>
+
+          <ion-list margin-bottom>
+            <ion-list-header color="light">
+              <ion-label class="fw700">Form</ion-label>
+            </ion-list-header>
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  First Name:
+                </ion-label>
+                <ion-input autocapitalize color="secondary" type="text" formControlName="cfname" [value]="info.cfname"></ion-input>
+              </ion-item>
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  Last Name:
+                </ion-label>
+                <ion-input autocapitalize color="secondary" type="text" formControlName="clname" [value]="info.clname"></ion-input>
+              </ion-item>
+
+
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  Office:
+                </ion-label>
+                <ion-input color="secondary" type="text" formControlName="ofc_code" [value]="info.ofc_code"></ion-input>
+              </ion-item>
+              <p ion-text class="text08" *ngIf="form.get('ofc_code').touched && form.get('ofc_code').hasError('required')">
+                <ion-text color="warning">
+                  Required Field
+                </ion-text>
+              </p>
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  Position Title:
+                </ion-label>
+                <ion-input color="secondary" type="text" formControlName="postitle" [value]="info.postitle"></ion-input>
+              </ion-item>
+              <p ion-text class="text08" *ngIf="form.get('postitle').touched && form.get('postitle').hasError('required')">
+                <ion-text color="warning">
+                  Required Field
+                </ion-text>
+              </p>
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  Mobile Number:
+                </ion-label>
+                <ion-input color="secondary" type="text" formControlName="mobileno" [value]="info.mobileno"></ion-input>
+              </ion-item>
+              <p ion-text class="text08" *ngIf="form.get('mobileno').touched && form.get('mobileno').hasError('required')">
+                <ion-text color="warning">
+                  Required Field
+                </ion-text>
+              </p>
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  Telephone:
+                </ion-label>
+                <ion-input color="secondary" type="text" formControlName="telno" [value]="info.telno"></ion-input>
+              </ion-item>
+              <p ion-text class="text08" *ngIf="form.get('telno').touched && form.get('telno').hasError('required')">
+                <ion-text color="warning">
+                  Required Field
+                </ion-text>
+              </p>
+              <ion-item no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  Email:
+                </ion-label>
+                <ion-input color="secondary" type="text" formControlName="emailadd" [value]="info.emailadd"></ion-input>
+              </ion-item>
+              <p ion-text class="text08" *ngIf="form.get('emailadd').touched && form.get('emailadd').hasError('required')">
+                <ion-text color="warning">
+                  Required Field
+                </ion-text>
+              </p>
+
+
+          </ion-list>
+  
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+ </form>
+    <ion-button size="large" expand="full" color="dark" [disabled]="!form.valid" (click)="sendData(form.value)" no-margin>Edit</ion-button>
+  </ion-card>
+
+  <div padding>
+    <ion-text color="dark" no-margin>
+
+    </ion-text>
+  </div>
+</ion-content>
+
+
+
+
+<!--ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="profile">
+  <ion-card no-margin>
+    <ion-card-content class="bg-profile">
+      <img src="assets/img/avatar.jpeg">
+      <h1 class="fw500">João Firmino</h1>
+      <h2 color="light" margin-bottom>Customer</h2>
+      <ion-button icon-left color="secondary">
+        <ion-icon name="photos"></ion-icon> 
+        Edit / Add Avatar
+      </ion-button>
+    </ion-card-content>
+  
+    <ion-grid fixed no-padding>
+      <ion-row>
+        <ion-col size="12" padding>
+
+          <ion-list margin-bottom>
+            <ion-list-header color="light">
+              <ion-label class="fw700">Form</ion-label>
+            </ion-list-header>
+
+            <ion-item>
+              <ion-label color="dark" position="stacked">Full Name:</ion-label>
+              <ion-input inputmode="text" placeholder="Ex..: Joe Doe" value="João Firmino"></ion-input>
+            </ion-item>
+    
+            <ion-item>
+              <ion-label color="dark" position="stacked">Email:</ion-label>
+              <ion-input inputmode="email" placeholder="Ex.: joe@doe.com" value="firminoata@gmail.com"></ion-input>
+            </ion-item>
+    
+            <ion-item>
+              <ion-label color="dark" position="stacked">Address:</ion-label>
+              <ion-input inputmode="text" placeholder="Ex.: Abey Road 5"></ion-input>
+            </ion-item>
+    
+            <ion-item>
+              <ion-label color="dark">City</ion-label>
+              <ion-select>
+                <ion-select-option value="nes">New York</ion-select-option>
+                <ion-select-option value="n64">Los Angeles</ion-select-option>
+                <ion-select-option value="ps">London</ion-select-option>
+                <ion-select-option value="genesis">Paris</ion-select-option>
+                <ion-select-option value="saturn">São Paulo</ion-select-option>
+                <ion-select-option value="snes">Tokyo</ion-select-option>
+                <ion-select-option value="snes">New Delhi</ion-select-option>
+              </ion-select>
+            </ion-item>
+    
+            <ion-item>
+              <ion-label color="dark">State</ion-label>
+              <ion-select>
+                <ion-select-option value="nes">NY</ion-select-option>
+                <ion-select-option value="n64">CA</ion-select-option>
+                <ion-select-option value="ps">Greater London</ion-select-option>
+                <ion-select-option value="genesis">Paris</ion-select-option>
+                <ion-select-option value="saturn">SP</ion-select-option>
+                <ion-select-option value="snes">Kantō</ion-select-option>
+                <ion-select-option value="snes">Delhi</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+
+          <ion-list>
+            <ion-radio-group>
+              <ion-list-header color="light">
+                <ion-label class="fw700">User Type</ion-label>
+              </ion-list-header>
+          
+              <ion-item>
+                <ion-label color="primary">Customer</ion-label>
+                <ion-radio slot="start" value="customer" checked></ion-radio>
+              </ion-item>
+          
+              <ion-item>
+                <ion-label color="primary">Owner</ion-label>
+                <ion-radio slot="start" value="agent"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+
+            <ion-item>
+              <ion-label class="text-1x">Checkbox test</ion-label>
+              <ion-checkbox></ion-checkbox>
+            </ion-item>
+          </ion-list>
+  
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-button size="large" expand="full" color="dark" (click)="sendData()" no-margin>Edit</ion-button>
+  </ion-card>
+  
+  <div padding>
+    <ion-text color="dark" no-margin>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum odio placeat incidunt nesciunt atque ratione quisquam, fugit
+      omnis maxime adipisci excepturi dignissimos aliquam asperiores itaque unde sequi? Minus, quia, dolore?
+    </ion-text>
+  </div>
+</ion-content-->

@@ -1,0 +1,123 @@
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="theme-bg"></div>
+  <div class="auth-content">
+
+    <!-- Logo -->
+    <div padding-horizontal text-center>
+      <div class="logo"></div>
+      <h4 no-margin>
+        <ion-text color="light" class="fw700">
+          DOH CHD BICOL DATA COLLECT APP
+        </ion-text>
+      </h4>
+    </div>
+
+    <div text-center>
+      <h4 no-margin>
+        <ion-text color="secondary" class="fw700">
+          Login Here
+        </ion-text>
+      </h4>
+    </div>
+
+    <!-- Login form -->
+    
+
+
+    <form [formGroup]="onLoginForm" class="list-form">
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="mail" item-start></ion-icon>
+          User Name
+        </ion-label>
+        <ion-input color="secondary" type="email" formControlName="userid" [value]="x"></ion-input>
+      </ion-item>
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="lock" item-start></ion-icon>
+          Password
+        </ion-label>
+        <ion-input color="primary" type="password" formControlName="userpass" [value]="xx"></ion-input>
+      </ion-item>
+    </form>
+
+
+    <!-- <form [formGroup]="onLoginForm" class="list-form">
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="mail" item-start></ion-icon>
+          Facility Code
+        </ion-label>
+        <ion-input color="secondary" type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required')">
+        <ion-text color="warning">
+          Required Field
+        </ion-text>
+      </p>
+
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="lock" item-start></ion-icon>
+          Password
+        </ion-label>
+        <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <p ion-text color="warning" class="text08" *ngIf="onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required')">
+        <ion-text color="warning">
+          Required Field
+        </ion-text>
+        </p>
+    </form> -->
+
+    <!-- <p text-right tappable (click)="forgotPass()" class="paz">
+      <ion-text color="light">
+        <strong>Forgot Password?</strong>
+      </ion-text>
+    </p> -->
+
+    <div>
+      <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="goToHome(onLoginForm.value)" [disabled]="!onLoginForm.valid" tappable>
+        <ion-icon name="log-in"></ion-icon>
+        Sign-in
+      </ion-button>
+
+      <p text-center>
+        <ion-text color="light">
+          Or Sign-in with:
+        </ion-text>
+      </p>
+
+      <ion-grid class="btn-group">
+        <ion-row>
+          <ion-col size="4">
+            <ion-button (click)="goToProfile()" shape="round" expand="full" color="tertiary">
+              <ion-icon slot="icon-only" name="logo-facebook">SQLITE SAMPLE</ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button shape="round" expand="full" color="secondary">
+              <ion-icon slot="icon-only" name="logo-twitter"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button shape="round" expand="full" color="danger">
+              <ion-icon slot="icon-only" name="logo-googleplus"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </div>
+
+    <!-- Other links -->
+    <div text-center margin-top>
+      <span (click)="goToRegister()" class="paz" tappable>
+        <ion-text color="light">
+          New here? <strong>Sign Up</strong>
+        </ion-text>
+      </span>
+    </div>
+
+  </div>
+</ion-content>

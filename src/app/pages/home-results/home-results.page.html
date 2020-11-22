@@ -1,0 +1,404 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">Daily Report List</ion-text>
+        </ion-text>
+    </ion-title>
+    <!--ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="medium" (click)="notifications()">
+        <ion-icon name="notifications"></ion-icon>
+        <ion-badge color="dark" slot="end">2</ion-badge>
+      </ion-button>
+    </ion-buttons-->
+
+    <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="light" (click)="viewdata()">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+
+
+
+
+<ion-toolbar color="dark">
+
+    <ion-button color="light" expand="full" (click)="gotoMysamplepage()" no-margin>
+      <strong>My Sample Page</strong>
+    </ion-button>
+
+  <ion-segment [(ngModel)]="selectedView" scrollable>
+    <ion-segment-button value="pg1" (click)="onsearch()">
+      <ion-icon name="medkit"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="pg2" >
+      <ion-icon name="clock"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="pg3" >
+      <ion-icon name="flask"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="pg4" >
+      <ion-icon name="contact"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="pg4" >
+      <ion-icon name="stats"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+
+</ion-toolbar>
+  <!--ion-toolbar color="dark">
+    <ion-searchbar [(ngModel)]="searchKey"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="medium" (click)="searchFilter()">
+        <ion-icon name="options"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar-->
+
+  <ion-toolbar color="light" >
+      <ion-label *ngIf="selectedView=='pg1'">
+        <h2>
+          &nbsp;&nbsp;<b>My SQL DATA</b>
+        </h2>
+      </ion-label>
+      <ion-label *ngIf="selectedView=='pg2'">
+        <h2>
+          &nbsp;&nbsp;<b>PAGE 2</b>
+        </h2>
+      </ion-label>
+      <ion-label *ngIf="selectedView=='pg3'">
+        <h2>
+          &nbsp;&nbsp;<b>PAGE 3</b>
+        </h2>
+      </ion-label>
+      <ion-label *ngIf="selectedView=='pg4'">
+        <h2>
+          &nbsp;&nbsp;<b>PAGE 4</b>
+        </h2>
+      </ion-label>
+      <ion-label *ngIf="selectedView=='pg5'">
+        <h2>
+          &nbsp;&nbsp;<b>PAGE 5</b>
+        </h2>
+      </ion-label>
+
+
+
+
+    <ion-buttons slot="end" *ngIf="selectedView=='pg1'">
+
+      <ion-button size="small" shape="round" color="dark" (click)="viewdata()">
+        
+        <b>add</b>
+        
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <!--ion-buttons slot="end" *ngIf="selectedView=='pg2'">
+
+      <ion-button size="small" shape="round" color="dark" (click)="viewdata2()">
+        
+        <b>add</b>
+        
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" *ngIf="selectedView=='pg3'">
+
+      <ion-button size="small" shape="round" color="dark" (click)="viewdata3()">
+        
+        <b>add</b>
+        
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" *ngIf="selectedView=='pg4'">
+
+      <ion-button size="small" shape="round" color="dark" (click)="viewdata4()">
+        
+        <b>add</b>
+        
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons-->
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <!--ion-card no-margin class="no-radius">
+    <ion-item lines="none" color="light">
+      <ion-label>
+        <h2 no-margin class="fw500 no-margin">
+          <ion-text color="dark">Alert / Toast test</ion-text>
+        </h2>
+
+        <p class="text-11x no-margin">
+          <ion-text  color="primary">{{yourLocation}}</ion-text>
+        </p>
+      </ion-label>
+      <ion-button shape="round" fill="outline" size="small" color="primary" (click)="alertLocation()">
+        Location
+        <ion-icon name="locate"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-card-->
+
+
+  <div  [ngSwitch]="selectedView">
+
+      <div *ngSwitchCase="'pg1'" >
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+  </ion-refresher>
+
+      <ion-item lines="none" color="medium" *ngIf="inventorylist==''">
+        <ion-label>
+          <h2 no-margin class="fw500 no-margin">
+            <ion-text color="dark">Could not retrieve or no data!</ion-text>
+          </h2>
+        </ion-label>
+      </ion-item>
+
+      
+      <ion-card class="bg-white" *ngFor="let item of inventorylist">
+  <ion-grid >
+      <ion-row>
+      <ion-col class="ion-no-padding">
+        <div class="ion-text-end">
+        
+        <a style="font-size: large"  (click)="deletedata(item)">
+          <ion-icon name="trash" color="dark"></ion-icon>
+        </a>
+
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+      <!--ion-buttons slot="start">
+                  <ion-button color="dark" (click)="viewdata(item)" no-margin>
+                      <ion-icon name="trash"></ion-icon>
+                  </ion-button>
+        </ion-buttons-->
+        <ion-button expand="full" color="dark" (click)="viewdata(item)" no-margin>
+        <strong>{{item.reportdate}}</strong>
+      </ion-button>
+
+            <ion-item no-margin >
+              
+
+
+              <ion-label no-margin>
+
+
+
+                <ion-text>
+                  <!--h2><strong>{{item.reportdate}}</strong></h2-->
+                  <span class="rptdetails">N95 Mask (pieces): {{item.ms1}}</span>
+
+
+                  <br/>
+                  <span class="rptdetails">Surgical Mask (pieces): {{item.ms2}}</span><br/>
+                  <span class="rptdetails">Oseltamivir 75mg (capsules): {{item.ms3}}</span><br/>
+                  <span class="rptdetails">PPE (sets): {{item.ms4}}</span><br/>
+                  <span class="rptdetails">Hand Sanitizer (bottles): {{item.ms5}}</span><br/>
+                  <span class="rptdetails">Gloves (pieces): {{item.ms6}}</span><br/>
+                </ion-text>
+
+                <ion-menu-toggle no-margin class="mto" auto-hide="false">
+                  
+                    <ion-text class="rptdetails" color="medium">                   
+                    Date Submitted: <strong>{{ item.addeddate }}</strong>
+                    </ion-text><br/>
+                    <ion-text class="rptdetails" color="medium">                   
+                    Date Updated: <strong>{{ item.updateddate }}</strong>
+                    </ion-text>
+
+                </ion-menu-toggle>
+              </ion-label>
+
+            </ion-item>
+            
+      </ion-card>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  </div>
+
+
+
+
+
+
+  <div *ngSwitchCase="'pg2'" >
+  <ion-refresher (ionRefresh)="doRefresh2($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+  </ion-refresher>
+
+      <ion-item lines="none" color="medium" *ngIf="inventorylist2==''">
+        <ion-label>
+          <h2 no-margin class="fw500 no-margin">
+            <ion-text color="dark">Could not retrieve or no data!</ion-text>
+          </h2>
+        </ion-label>
+      </ion-item>
+
+
+              <ion-item class="animated fadeInUp">
+                  <ion-label position="stacked">
+                    First Number:
+                  </ion-label>
+                <ion-input [(ngModel)]="mynum1" type="numeric" name="num1"  #ms6="ngModel" required pattern="[0-9]*"></ion-input>
+              </ion-item>
+              
+
+              <ion-item class="animated fadeInUp">
+                  <ion-label position="stacked">
+                    Second Number:
+                  </ion-label>
+                <ion-input [(ngModel)]="mynum2" type="numeric" name="num2"  #ms6="ngModel" required pattern="[0-9]*"></ion-input>
+              </ion-item>
+              
+              <br/>
+              <p>mynum1 + mynum2</p>
+              {{ mynum1 + mynum2 }}
+              <br/>
+              <p>addmynum()</p>
+              {{ addmynum() }}
+
+
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  </div>
+
+
+
+
+
+
+
+  <div *ngSwitchCase="'pg3'" >
+  <ion-refresher (ionRefresh)="doRefresh3($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+  </ion-refresher>
+
+      <ion-item lines="none" color="medium" *ngIf="inventorylist3==''">
+        <ion-label>
+          <h2 no-margin class="fw500 no-margin">
+            <ion-text color="dark">Could not retrieve or no data!</ion-text>
+          </h2>
+        </ion-label>
+      </ion-item>
+
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite3($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+    
+  </div>
+
+
+
+
+
+
+
+  <div *ngSwitchCase="'pg4'" >
+
+    <ion-refresher (ionRefresh)="doRefresh4($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-item lines="none" color="medium" *ngIf="inventorylist4==''">
+      <ion-label>
+        <h2 no-margin class="fw500 no-margin">
+          <ion-text color="dark">Could not retrieve or no data!</ion-text>
+        </h2>
+      </ion-label>
+    </ion-item>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite4($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+
+  <div *ngSwitchCase="'pg5'" >
+
+    <ion-refresher (ionRefresh)="doRefresh4($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-item lines="none" color="medium" *ngIf="inventorylist4==''">
+      <ion-label>
+        <h2 no-margin class="fw500 no-margin">
+          <ion-text color="dark">Could not retrieve or no data!</ion-text>
+        </h2>
+      </ion-label>
+    </ion-item>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite4($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+
+
+</div>
+
+
+
+  <!--ion-card class="bg-white">
+    <ion-img [src]="themeCover"></ion-img>
+    <ion-button expand="full" color="dark" (click)="presentImage(themeCover)" no-margin>
+      Modal 1: Modal Image
+    </ion-button>
+  </ion-card>
+
+  <ion-button margin shape="round" expand="full" color="secondary" (click)="searchFilter()">
+    Modal 2: Search Filter
+  </ion-button-->
+  
+
+
+  <!--popmenu></popmenu-->
+
+</ion-content>
+  

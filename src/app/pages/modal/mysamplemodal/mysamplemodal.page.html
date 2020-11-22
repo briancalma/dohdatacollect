@@ -1,0 +1,149 @@
+<ion-header>
+  <ion-toolbar color="primary">
+  	<ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">SAMPLE MODAL</ion-text>
+        </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button size="small" shape="round" (click)="closeModal()" color="light">
+        <ion-icon slot="start" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+
+
+    <ion-grid fixed no-padding>
+      <ion-row>
+        <ion-col size="12" padding>
+
+          <ion-list margin-bottom>
+          	<h2>{{data.firstname}} {{data.lastname}}</h2>
+          	<ion-list-header color="light">
+              <ion-label class="fw700">Reporting Form</ion-label>
+            </ion-list-header>
+
+
+			<form  #frm="ngForm" (ngSubmit)="submitdata()">
+            
+            <ion-item  no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  N95 MASK (pieces):
+                </ion-label>
+            	<ion-input [(ngModel)]="tempdata['0']['ms1']" type="numeric" name="ms1"  #ms1="ngModel" required pattern="[0-9]*"></ion-input>
+            </ion-item>
+            <div *ngIf="ms1.touched" color="red">
+            	<div *ngIf="ms1.errors?.required">
+            		This is Required!
+            	</div>
+            	<div *ngIf="ms1.errors?.pattern">
+            		Invalid number!
+            	</div>             
+            </div>
+
+
+            <ion-item  no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  SURGICAL MASK (pieces):
+                </ion-label>
+            	<ion-input [(ngModel)]="tempdata['0']['ms2']" type="numeric" name="ms2"  #ms2="ngModel" required pattern="[0-9]*"></ion-input>
+            </ion-item>
+            <div *ngIf="ms2.touched" color="red">
+            	<div *ngIf="ms2.errors?.required">
+            		This is Required!
+            	</div>
+            	<div *ngIf="ms2.errors?.pattern">
+            		Invalid number!
+            	</div>             
+            </div>
+
+
+            <ion-item  no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  OSELTAMIVIR 75mg (capsules):
+                </ion-label>
+            	<ion-input [(ngModel)]="tempdata['0']['ms3']" type="numeric" name="ms3"  #ms3="ngModel" required pattern="[0-9]*"></ion-input>
+            </ion-item>
+            <div *ngIf="ms3.touched" color="red">
+            	<div *ngIf="ms3.errors?.required">
+            		This is Required!
+            	</div>
+            	<div *ngIf="ms3.errors?.pattern">
+            		Invalid number!
+            	</div>             
+            </div>
+
+
+            <ion-item  no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  PPE (sets):
+                </ion-label>
+            	<ion-input [(ngModel)]="tempdata['0']['ms4']" type="numeric" name="ms4"  #ms4="ngModel" required pattern="[0-9]*"></ion-input>
+            </ion-item>
+            <div *ngIf="ms4.touched" color="red">
+            	<div *ngIf="ms4.errors?.required">
+            		This is Required!
+            	</div>
+            	<div *ngIf="ms4.errors?.pattern">
+            		Invalid number!
+            	</div>             
+            </div>
+
+
+            <ion-item  no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  HAND SANITIZER (bottles):
+                </ion-label>
+            	<ion-input [(ngModel)]="tempdata['0']['ms5']" type="numeric" name="ms5"  #ms5="ngModel" required pattern="[0-9]*"></ion-input>
+            </ion-item>
+            <div *ngIf="ms5.touched" color="red">
+            	<div *ngIf="ms5.errors?.required">
+            		This is Required!
+            	</div>
+            	<div *ngIf="ms5.errors?.pattern">
+            		Invalid number!
+            	</div>             
+            </div>
+
+
+            <ion-item  no-padding class="animated fadeInUp">
+                <ion-label position="stacked">
+                  GLOVES (pieces):
+                </ion-label>
+            	<ion-input [(ngModel)]="tempdata['0']['ms6']" type="numeric" name="ms6"  #ms6="ngModel" required pattern="[0-9]*"></ion-input>
+            </ion-item>
+            <div *ngIf="ms6.touched" color="red">
+            	<div *ngIf="ms6.errors?.required">
+            		This is Required!
+            	</div>
+            	<div *ngIf="ms6.errors?.pattern">
+            		Invalid number!
+            	</div>             
+            </div>
+
+
+            <ion-item no-padding class="animated fadeInUp">
+  <!--ion-label>REPORT DATE: </ion-label-->
+            <ion-label position="stacked">
+                  REPORT DATE:
+            </ion-label>
+  			<ion-datetime name="reportdate" [value]="mydate" [min]="mydate" [max]="mydate"
+    			[(ngModel)]="tempdata['0']['reportdate']"
+    			displayFormat="YYYY M D" required></ion-datetime>
+			</ion-item>
+
+            <ion-button expand="full" color="primary" type="submit" [disabled]="frm.invalid">Submit</ion-button>
+        	
+
+
+        	</form>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</ion-content>

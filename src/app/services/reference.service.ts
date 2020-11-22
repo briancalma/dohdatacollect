@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable, forkJoin } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpRequest } from '@angular/common/http';
-import { timeout } from 'rxjs/operators';
+import { timeout } from 'rxjs/operators'; 
 
 
 // const inventoryserver = "http://localhost/inventoryapi/";
